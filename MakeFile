@@ -1,0 +1,10 @@
+reall: clean all
+
+all : firewall
+
+firewall: 
+	gcc -o nfqnl_test nfqnl_test.c -lnetfilter_queue
+
+clean:
+	rm -f firewall
+	rm -f *.o

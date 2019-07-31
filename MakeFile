@@ -1,10 +1,15 @@
-reall: clean all
+reall : clean all
 
 all : firewall
 
-firewall: 
-	gcc -o nfqnl_test nfqnl_test.c -lnetfilter_queue
+firewall : main.o
+	g++ -g -o ${BUILD_DIR}/firewall ${BUILD_DIR}/main.o -lnetfilter_queue
 
-clean:
-	rm -f firewall
-	rm -f *.o
+main.o : makeBuildFolder
+	g++ -g -c -o ${BUILD_DIR}/main.o ${SOURCE_DIR}/main.cpp
+
+makeBuildFolder : 
+	mkdir -p ${BUILD_DIR}
+
+clean :
+	rm -f ${BUILD_DIR}/*
